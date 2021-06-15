@@ -33,69 +33,28 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-  console.clear();
-  let word = input.question("Let's play some scrabble! Enter a word to score: ");
-  console.log(oldScrabbleScorer(word)); 
-  return word
-  
-   //Parameter: word 
-    //Modify the provided initialPrompt() function to prompt the user to enter a word to score.
-    //do I need to define ,word,
-    //Use the oldScrabbleScorer() function provided to score the word provided by the user. Print the result to the console.
-    //input.question("Let's play some scrabble! Enter a word: ");
+  let wordChoice = input.question("Let's play some scrabble! Enter a word to score: "); 
+  return (wordChoice);
 };
+
+// function simpleScore
+
 function simpleScore(word){
-  return word.length
+  return word.length;
 }
- let scoringAlgorithms =
- [
-  {
-    name: 'Simple score',
-    description: 'Each letter is worth 1 point',
-    scorerFunction: simpleScore
-  },
-  {
-    name: 'Bonus Vowels',
-    description: 'Vowel are 3 pts, consonants are 1 pt',
-    scorerFunction: vowelBonusScore
-  },
-   
-  {
-    name: 'Scrabble',
-    description: 'The traditional scoring alogrithim',
-    // scorerFunction: scrabbleScore
-  }
-  ];
-
-//function simpleScore ``````
-
-//function simpleScoreObject(word) {}
 
 //function vowelBonusScore
-// take in a word, and ouput a score
-// loop through the word, if letter at index i in the word is a vowel, make score go up by 3
-// if the letter is not a vowel, score just goes up by 1
-// if letter at index i is included in our predetermined list of vowels, then add 3 to score
-// this is called a function declaration
-// vowelBonusScore('apple'); this should output a score of 9
-// vowelBonusScore('word'); this should output a score of 6
+
 function vowelBonusScore(word) {
   word = word.toUpperCase();
   let score = 0; 
   let vowels = ['A', 'E', 'I', 'O', 'U'];
-  for (let i = 0; i < word.length; i++){ // with methods, there's always parentheses vowels.includes() 
-  // the .includes method is going to return true or false
-  // let's say we pass apple into our vowelBonusScore function
-  // in the first iteration of this for loop, word[i] is going to be 'a'
-  // vowels.includes('a')
-  //console.log(i);
+  for (let i = 0; i < word.length; i++){ 
+
     if(vowels.includes(word[i])) {
       score = score + 3;
- 
     } else {
       score = score + 1;
-      // your next task is to code what happens when word[i] is not a vowel
-      // instead of adding 3 to score, we want to add 1
     }
   }
  
@@ -103,22 +62,64 @@ function vowelBonusScore(word) {
 }
 
 //function scrabbleScore
-let scrabbleScore;
+let  scrabbleScore;
 
-// const scoringAlgorithms = [];//create new ojects(object literal)
+// const scoringAlgorithms = [];
 
-function scorerPrompt() {}
+let scoringAlgorithms = [
+  {
+    name: 'Simple Score',
+    description: 'Each letter is worth 1 point',
+    scorerFunction: simpleScore
+  },
 
-function transform() {};
+  {
+    name:'Bonus Vowels',
+    description:'Vowels are 3 pts, consonants are 1 pt.',
+    scorerFunction: vowelBonusScore
+  },
+  
+  {
+    name:'Scrabble',
+    description:'The traditional scoring algorithm',
+    scorerFunction: oldScrabbleScorer
+  },
+];
 
-let newPointStructure;
+function scorerPrompt() {
+  let scoringChoice = input.question(`
+  Which scoring algorithm would you like to use?
 
-function runProgram() {
-   console.clear()
-   let userInput = initialPrompt();
-   let score = simpleScore(userInput);
-   console.log (score);
-    console.log (vowelBonusScore(userInput));
+  0 - Simple: One point per character
+  1 - Vowel Bonus: Vowels are worth 3 points
+  2 - Scrabble: Uses scrabble point system
+  Enter 0, 1, or 2: `);
+
+  return scoringAlgorithms[scoringChoice];
+  
+}
+let newPointStructure =transform(oldPointStructure);
+
+function transform() {
+  let transformObject = {};
+  for(point in oldPointStructure) { 
+    let oldLettersObject= letters[key];
+    for(let i =0; i<oldLettersObject.length; i++){{transformObject[oldLettersObject[i]] = Number(key);
+    }
+  }
+  
+};
+
+function runProgram
+() {
+   console.clear();
+  let wordChoice = initialPrompt();
+  let scoringObjectChoice = scorerPrompt();
+  console.log()
+
+   console.log(`Score for ${wordChoice}: ${scoringObjectChoice.scorerFunction(wordChoice)}
+   
+`)
 }
 
 // Don't write any code below this line //
