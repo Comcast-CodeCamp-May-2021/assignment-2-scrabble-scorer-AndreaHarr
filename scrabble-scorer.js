@@ -11,7 +11,7 @@ const oldPointStructure = {
   8: ['J', 'X'],
   10: ['Q', 'Z']
 };
-
+// console.log(oldPointStructure[''])
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	let letterPoints = "";
@@ -101,13 +101,19 @@ function scorerPrompt() {
 let newPointStructure =transform(oldPointStructure);
 
 function transform() {
-  let transformObject = {};
-  for(point in oldPointStructure) { 
-    let oldLettersObject= letters[key];
-    for(let i =0; i<oldLettersObject.length; i++){{transformObject[oldLettersObject[i]] = Number(key);
-    }
-  }
   
+  let transformObject = {};
+
+  for (score in oldPointStructure) {
+     
+    for (let i = 0; i<oldPointStructure[score].length; i++) {
+
+      transformObject[oldPointStructure[score][i].toLowerCase()] = Number(score);
+    
+    }
+  
+  };
+ return transformObject
 };
 
 function runProgram
@@ -136,4 +142,3 @@ module.exports = {
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
-
